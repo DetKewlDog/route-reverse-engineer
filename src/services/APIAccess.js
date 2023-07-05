@@ -29,7 +29,7 @@ class APIAccess {
         if (coords.includes(originStr)) return undefined;
 
         try {
-            const response = await axios.get(`http://router.project-osrm.org/route/v1/walking/${originStr};${destinationStr}?overview=full`);
+            const response = await axios.get(`https://router.project-osrm.org/route/v1/walking/${originStr};${destinationStr}?overview=full`);
             const data = response.data;
 
             if (!data.routes || data.routes.length <= 0) return undefined;
