@@ -45,7 +45,7 @@ svg {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.author {
+.author a {
     color: var(--text3);
     font-size: 14px;
     margin-left: auto;
@@ -64,32 +64,7 @@ svg {
     border-radius: 5px;
 	height: calc(100vh - 190px);
     overflow-y: auto;
-	/* scroll-behavior: smooth;
-	scrollbar-width: thin;
-  	scrollbar-color: var(--hl2) var(--hl1); */
 }
-/*
-.output::-webkit-scrollbar {
-  	width: 12px;
-}
-
-.output::-webkit-scrollbar-track {
-  	background-color: var(--hl1);
-	border-radius: 10px;
-}
-
-.output::-webkit-scrollbar-thumb {
-  	background-color: var(--hl2);
-	border-radius: 10px;
-}
-
-.output::-webkit-scrollbar-thumb:hover {
-  	background-color: var(--hl3);
-}
-
-.output::-webkit-scrollbar-thumb:active {
-    background-color: var(--hl2);
-} */
 
 input {
     width: calc(27.198% - 24.5px);

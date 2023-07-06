@@ -30,7 +30,7 @@ function App() {
 		<>
 			<div className="header">
 				<span className="title">Route Reverse Engineer</span>
-				<span className="author">By DetKewlDog</span>
+				<span className="author"><a href="https://detkewldog.netlify.app" target="_blank">By DetKewlDog</a></span>
 			</div>
 			<div className="body">
 				<Config
