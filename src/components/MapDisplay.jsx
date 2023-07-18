@@ -5,7 +5,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import MapMarker from './MapMarker';
 
-function MapDisplay({ latitude, longitude, distance, isOnline }) {
+function MapDisplay({ latitude, longitude, distance, isOnline, setCoords }) {
     var [markers, setMarkers] = useState([]);
 
     useEffect(() => {
@@ -41,7 +41,7 @@ function MapDisplay({ latitude, longitude, distance, isOnline }) {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 />
-                <MapMarker key='dest' marker={[latitude, longitude]} />
+                <MapMarker key='dest' coords={[latitude, longitude]} setCoords={!isOnline ? setCoords : undefined} />
                 {markers.map((marker, index) => (
                     <MapMarker {...marker} key={index} />
                 ))}

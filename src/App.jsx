@@ -28,7 +28,15 @@ function App() {
 
 	const setCommunication = (state) => {
         if (online !== state) setOnline(state);
-    }
+	}
+
+	function setCoords(coords) {
+		updateLatitude(coords[0]);
+		updateLongitude(coords[1]);
+
+		document.querySelector('#inLat').value = coords[0];
+		document.querySelector('#inLong').value = coords[1];
+	}
 
 	return (
 		<>
@@ -52,6 +60,7 @@ function App() {
 					longitude={longitude}
 					distance={distance}
 					isOnline={online}
+					setCoords={setCoords}
 				/>
 			</div>
 		</>

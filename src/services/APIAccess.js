@@ -41,7 +41,7 @@ class APIAccess {
             console.log(distance, walkDistance);
             coords.push(originStr);
             return {
-                marker: [origin.lat, origin.lon],
+                coords: [origin.lat, origin.lon],
                 route: APIAccess.decodePolyline(data.routes[0].geometry),
                 distance: data.routes[0].distance
             };
