@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import "../index.css";
 import APIAccess from '../services/APIAccess.js';
-import { MapContainer, TileLayer, LayersControl, Marker } from 'react-leaflet';
+import { MapContainer, TileLayer, LayersControl, LayerGroup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import MapMarker from './MapMarker';
 
@@ -16,7 +16,7 @@ function MapLayer({ name, url, subdomains, checked=false }) {
 
 function MapDisplay({ latitude, longitude, distance, isOnline, setCoords }) {
     var [markers, setMarkers] = useState([]);
-    const [map, setMap] = useState(null)
+    const [map, setMap] = useState(null);
 
     useEffect(() => {
         async function fetchData() {
@@ -34,7 +34,7 @@ function MapDisplay({ latitude, longitude, distance, isOnline, setCoords }) {
                 setMarkers(prevMarkers => [...prevMarkers, point]);
             }
         }
-        document.querySelectorAll('.output').forEach(x => x.addEventListener('wheel', preventScroll, {passive: false}));
+        document.querySelectorAll('.output').forEach(x => x.addEventListener('wheel', preventScroll, { passive: false }));
 
         function preventScroll(e){
             e.preventDefault();
@@ -66,7 +66,7 @@ function MapDisplay({ latitude, longitude, distance, isOnline, setCoords }) {
                         url='http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}' />
 
                     <LayersControl.Overlay name='Dark Mode'>
-                        <Marker></Marker>
+                        <LayerGroup></LayerGroup>
                     </LayersControl.Overlay>
                 </LayersControl>
 
