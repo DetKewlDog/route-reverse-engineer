@@ -25,7 +25,7 @@ function MapDisplay({ latitude, longitude, distance, isOnline, setCoords }) {
                 setMarkers(prevMarkers => [...prevMarkers, point]);
             }
         }
-        document.querySelectorAll('div').forEach(x => x.addEventListener('wheel', preventScroll, {passive: false}));
+        document.querySelectorAll('.output').forEach(x => x.addEventListener('wheel', preventScroll, {passive: false}));
 
         function preventScroll(e){
             e.preventDefault();

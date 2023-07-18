@@ -31,8 +31,7 @@ svg {
 	padding-top: 15px;
 	padding-bottom: 15px;
     background-color: var(--bg2);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -67,9 +66,8 @@ svg {
 }
 
 input {
-    width: calc(27.198% - 24.5px);
-    padding-top: 10px;
-    padding-bottom: 10px;
+    width: calc(27.198% - 16.5px);
+    height: 36.91px;
     margin-inline: 4px;
     background-color: var(--bg2);
     border: none;
@@ -83,6 +81,9 @@ input {
 	text-indent: 10px;
     font-family: 'Consolas', monospace;
 }
+
+input:first-of-type { margin-inline-start: 0; }
+button:last-of-type { margin-inline-end: 0; }
 
 input:hover {
 	background-color: var(--hl1);
@@ -101,9 +102,54 @@ input:focus {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+.body > div:not(.output) > span {
+    display: none;
+}
+
+.body > div:not(.output) {
+    display: flex;
+}
+
+div:has(+input) > span {
+    display: block !important;
+    width: 200px;
+    margin-left: calc((27.198vw - 16.5px - 200px) / 2);
+    margin-top: -36px;
+    background-color: var(--hl3);
+    color: var(--text1);
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+}
+
+div:has(+input) > span::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: var(--hl3) transparent transparent transparent;
+}
+
+div:has(+input:hover) > span {
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+}
+
 button {
     width: 10%;
-    padding: 10px 15px;
+    height: 38.9px;
+    padding: 0 15px;
     margin-inline: 4px;
     background-color: var(--bg2);
     border: none;
