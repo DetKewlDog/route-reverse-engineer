@@ -12,6 +12,9 @@
     --text1: #ffffff;
     --text2: #aaaaaa;
     --text3: #777777;
+
+    --dark-tile-border: #303030;
+    --dark-tile-filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
 }
 
 body {
@@ -82,7 +85,7 @@ div:not(.output) > input {
     font-family: 'Consolas', monospace;
 }
 
-div:not(.output) > input:first-of-type { margin-inline-start: 0; }
+input[type=number]:first-of-type { margin-inline-start: 0; }
 button:last-of-type { margin-inline-end: 0; }
 
 div:not(.output) > input:hover {
@@ -191,4 +194,30 @@ button:not(:hover).on {
 
 img.leaflet-marker-shadow {
     display: none;
+}
+
+* :has(input[type=checkbox]:checked):has(label:last-of-type input[type=radio]:not(:checked)) .leaflet-tile {
+    filter: var(--dark-tile-filter, none) !important;
+}
+
+.leaflet-container {
+    background: var(--dark-tile-border) !important;
+}
+
+.leaflet-control,
+.leaflet-bar a {
+    background: var(--bg2) !important;
+    color: var(--text2) !important;
+    border: 1px solid var(--hl2) !important;
+}
+
+.leaflet-control:hover > :not(a),
+.leaflet-bar a:hover {
+    background: var(--hl1) !important;
+    border: 1px solid var(--hl3) !important;
+}
+
+input[type=checkbox] + span,
+input[type=radio] + span {
+    user-select: none;
 }

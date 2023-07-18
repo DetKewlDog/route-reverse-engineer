@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import "../index.css";
 import APIAccess from '../services/APIAccess.js';
-import { MapContainer, TileLayer, LayersControl } from 'react-leaflet';
+import { MapContainer, TileLayer, LayersControl, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import MapMarker from './MapMarker';
 
@@ -57,13 +57,17 @@ function MapDisplay({ latitude, longitude, distance, isOnline, setCoords }) {
                     <MapLayer name="Leaflet"
                         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
 
+                    <MapLayer name="Terrain"
+                        subdomains={['mt0', 'mt1','mt2','mt3']}
+                        url='http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}' />
+
                     <MapLayer name="Satellite"
                         subdomains={['mt0', 'mt1','mt2','mt3']}
                         url='http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}' />
 
-                    <MapLayer name="Terrain"
-                        subdomains={['mt0', 'mt1','mt2','mt3']}
-                        url='http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}' />
+                    <LayersControl.Overlay name='Dark Mode'>
+                        <Marker></Marker>
+                    </LayersControl.Overlay>
                 </LayersControl>
 
                 <MapMarker key='dest' coords={[latitude, longitude]} setCoords={!isOnline ? setCoords : undefined} />
