@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
 import "../index.css";
 import APIAccess from '../services/APIAccess.js';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import MapMarker from './MapMarker';
 
 function MapDisplay({ latitude, longitude, distance, isOnline, setCoords }) {
     var [markers, setMarkers] = useState([]);
+    const [map, setMap] = useState(null)
 
     useEffect(() => {
         async function fetchData() {
             if (!isOnline) return;
+            map.flyTo([latitude, longitude], 13);
             const positions = await APIAccess.fetchPositionsAroundDest([latitude, longitude], distance);
             distance /= 1000;
             const destinationStr = `${longitude},${latitude}`;
@@ -36,7 +38,7 @@ function MapDisplay({ latitude, longitude, distance, isOnline, setCoords }) {
 
     return (
         <div className="output">
-            <MapContainer center={[latitude, longitude]} zoom={13} style={{ height: "100%", width: "100%" }}>
+            <MapContainer center={[latitude, longitude]} zoom={13} ref={setMap} style={{ height: "100%", width: "100%" }}>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

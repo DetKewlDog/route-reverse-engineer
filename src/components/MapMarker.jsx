@@ -26,9 +26,8 @@ export default function MapMarker({ coords, route, distance, setCoords }) {
         popupclose() { setIsPressed(false); },
         dragend() {
             const marker = markerRef.current;
-            if (marker === null || distance === null || setCoords === null) return;
+            if (marker === null || setCoords === null) return;
             const newPosition = Object.values(marker.getLatLng());
-            console.log(setCoords)
             setCoords(newPosition);
         }
     }), []);
