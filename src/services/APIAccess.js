@@ -46,7 +46,7 @@ class APIAccess {
 
             const distance = (data.routes[0].distance / 1000).toFixed(3);;
 
-            if (Math.abs(distance - walkDistance) > 0.1) return undefined;
+            if (Math.abs(distance - walkDistance) > 0.15) return undefined;
 
             coords.push(originStr);
             return {

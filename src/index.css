@@ -65,7 +65,7 @@ svg {
     overflow-y: auto;
 }
 
-input {
+div:not(.output) > input {
     width: calc(27.198% - 16.5px);
     height: 36.91px;
     margin-inline: 4px;
@@ -82,17 +82,17 @@ input {
     font-family: 'Consolas', monospace;
 }
 
-input:first-of-type { margin-inline-start: 0; }
+div:not(.output) > input:first-of-type { margin-inline-start: 0; }
 button:last-of-type { margin-inline-end: 0; }
 
-input:hover {
+div:not(.output) > input:hover {
 	background-color: var(--hl1);
 	transform: translateY(-2px);
 	transition: transform 0.3s ease-in-out;
 }
 
-input:active,
-input:not(:hover) {
+div:not(.output) > input:active,
+div:not(.output) > input:not(:hover) {
     background-color: var(--bg2);
 	transform: translateY(2px);
 	transition: transform 0.1s ease-in-out;

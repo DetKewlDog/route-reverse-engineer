@@ -1,9 +1,18 @@
 import { useState, useEffect } from 'react';
 import "../index.css";
 import APIAccess from '../services/APIAccess.js';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { MapContainer, TileLayer, LayersControl } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import MapMarker from './MapMarker';
+
+function MapLayer({ name, url, subdomains, checked=false }) {
+    return (
+        <LayersControl.BaseLayer name={name} checked={checked}>
+            <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url={url} subdomains={subdomains || ['a', 'b', 'c']} />
+        </LayersControl.BaseLayer>
+    );
+}
 
 function MapDisplay({ latitude, longitude, distance, isOnline, setCoords }) {
     var [markers, setMarkers] = useState([]);
@@ -39,10 +48,24 @@ function MapDisplay({ latitude, longitude, distance, isOnline, setCoords }) {
     return (
         <div className="output">
             <MapContainer center={[latitude, longitude]} zoom={13} ref={setMap} style={{ height: "100%", width: "100%" }}>
-                <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                />
+
+                <LayersControl position="topright">
+                    <MapLayer name="Default" checked
+                        subdomains={['mt0', 'mt1', 'mt2', 'mt3']}
+                        url='http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}' />
+
+                    <MapLayer name="Leaflet"
+                        url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
+
+                    <MapLayer name="Satellite"
+                        subdomains={['mt0', 'mt1','mt2','mt3']}
+                        url='http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}' />
+
+                    <MapLayer name="Terrain"
+                        subdomains={['mt0', 'mt1','mt2','mt3']}
+                        url='http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}' />
+                </LayersControl>
+
                 <MapMarker key='dest' coords={[latitude, longitude]} setCoords={!isOnline ? setCoords : undefined} />
                 {markers.map((marker, index) => (
                     <MapMarker {...marker} key={index} />
