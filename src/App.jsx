@@ -4,10 +4,14 @@ import MapDisplay from './components/MapDisplay.jsx'
 import "./index.css";
 
 function App() {
-	var [latitude, setLatitude] = useState(51.16464197468807);
-	var [longitude, setLongitude] = useState(7.091874926571654);
-	var [distance, setDistance] = useState(1000);
+	var [latitude, setLatitude] = useState(localStorage.getItem('latitude') || 51.16464197468807);
+	var [longitude, setLongitude] = useState(localStorage.getItem('longitude') || 7.091874926571654);
+	var [distance, setDistance] = useState(localStorage.getItem('distance') || 1000);
 	var [online, setOnline] = useState(false);
+
+	const updateLatitude = (lat) => localStorage.setItem('latitude', lat) & setLatitude(lat);
+	const updateLongitude = (long) => localStorage.setItem('longitude', long) & setLongitude(long);
+	const updateDistance = (dist) => localStorage.setItem('distance', dist) & setDistance(dist);
 
 	const start = () => {
         const lat = document.querySelector('#inLat').value;
@@ -15,12 +19,12 @@ function App() {
 		const long = document.querySelector('#inLong').value;
 		if (long === '') return;
 		const dist = document.querySelector('#inDistance').value;
-        if (dist === '') return;
-		setLatitude(lat);
-		setLongitude(long);
-		setDistance(dist);
+		if (dist === '') return;
+		updateLatitude(lat);
+		updateLongitude(long);
+		updateDistance(dist);
         setCommunication(true);
-    }
+	}
 
 	const setCommunication = (state) => {
         if (online !== state) setOnline(state);
@@ -35,9 +39,9 @@ function App() {
 			<div className="body">
 				<Config
 					start={start}
-					setLatitude={setLatitude}
-					setLongitude={setLongitude}
-					setDistance={setDistance}
+					setLatitude={updateLatitude}
+					setLongitude={updateLongitude}
+					setDistance={updateDistance}
 					latitude={latitude}
 					longitude={longitude}
 					distance={distance}

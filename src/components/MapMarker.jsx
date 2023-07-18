@@ -1,5 +1,5 @@
 import { Marker, Popup, Polyline } from 'react-leaflet';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import L from 'leaflet';
 import _markerIcon from '../images/marker-icon.png';
 import _markerIconDest from '../images/marker-icon-dest.png';
@@ -20,6 +20,10 @@ const markerIconDest = new L.Icon({
 
 export default function MapMarker({ marker, route, distance }) {
     const [isPressed, setIsPressed] = useState(false);
+
+    useEffect(() => {
+
+    }, [marker]);
 
     const handlePress = () => setIsPressed(true);
     const handleUnpress = () => setIsPressed(false);
