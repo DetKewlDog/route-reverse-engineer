@@ -18,7 +18,7 @@ const markerIconDest = new L.Icon({
     popupAnchor: [0, -41],
 });
 
-export default function MapMarker({ coords, route, distance, setCoords }) {
+export default function MapMarker({ coords, route, distance, name, setCoords }) {
     const [isPressed, setIsPressed] = useState(false);
     const markerRef = useRef(null);
     const eventHandlers = useMemo(() => ({
@@ -42,8 +42,10 @@ export default function MapMarker({ coords, route, distance, setCoords }) {
     return (
         <Marker draggable={setCoords !== undefined} position={coords} eventHandlers={eventHandlers} ref={markerRef} icon={icon}>
             <Popup>
-                <a href={url} target="_blank">Google Maps link</a>
-                <br />
+                {name !== undefined && name.split('|').map(x => (
+                    <footer><b>{x}</b></footer>
+                ))}
+                <a href={url} target="_blank">Google Maps link<br /></a>
                 {distance !== undefined && `Distance: ${distance}m`}
             </Popup>
             {distance !== undefined && isPressed && <Polyline pathOptions={{ color: 'red' }} positions={route} />}

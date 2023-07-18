@@ -1,22 +1,32 @@
 import axios from 'axios';
 
 class APIAccess {
+    static getMarkerName(marker) {
+        let street = marker.tags['addr:street'];
+        if (!street) return undefined;
+        let num = marker.tags['addr:housenumber'];
+        if (num) street += ` ${num}`;
+        let name = marker.tags['name'];
+        if (name) street = `${name}|${street}`
+        return street;
+    }
+
     static async fetchPositionsAroundDest(destination, maxDistance) {
         const query = `[out:json];
         (
-        node["highway"="footway"](around:${maxDistance},${destination[0]},${destination[1]});
-        way["highway"="footway"](around:${maxDistance},${destination[0]},${destination[1]});
-        relation["highway"="footway"](around:${maxDistance},${destination[0]},${destination[1]});
+        node["addr:street"](around:${maxDistance},${destination[0]},${destination[1]});
+        way["addr:street"](around:${maxDistance},${destination[0]},${destination[1]});
+        relation["addr:street"](around:${maxDistance},${destination[0]},${destination[1]});
         );
         out center;`
         return axios.get("https://lz4.overpass-api.de/api/interpreter", { params: { data: query } })
             .then(result => result.data)
             .then(data => {
                 const positions = new Set(data.elements
-                    .filter(element => element.center)
                     .map(element => ({
-                        lat: element.center.lat,
-                        lon: element.center.lon
+                        lat: element?.center?.lat || element?.lat,
+                        lon: element?.center?.lon || element?.lon,
+                        name: APIAccess.getMarkerName(element)
                     })));
                 return positions;
             })
@@ -36,14 +46,14 @@ class APIAccess {
 
             const distance = (data.routes[0].distance / 1000).toFixed(3);;
 
-            if (Math.abs(distance - walkDistance) > 0.25) return undefined;
+            if (Math.abs(distance - walkDistance) > 0.1) return undefined;
 
-            console.log(distance, walkDistance);
             coords.push(originStr);
             return {
                 coords: [origin.lat, origin.lon],
                 route: APIAccess.decodePolyline(data.routes[0].geometry),
-                distance: data.routes[0].distance
+                distance: data.routes[0].distance,
+                name: origin.name
             };
         } catch (error) {
             console.error(error);
