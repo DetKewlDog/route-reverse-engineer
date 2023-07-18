@@ -4,9 +4,9 @@ class APIAccess {
     static async fetchPositionsAroundDest(destination, maxDistance) {
         const query = `[out:json];
         (
-        node["building"="residential"](around:${maxDistance},${destination[0]},${destination[1]});
-        way["building"="residential"](around:${maxDistance},${destination[0]},${destination[1]});
-        rel["building"="residential"](around:${maxDistance},${destination[0]},${destination[1]});
+        node["highway"="footway"](around:${maxDistance},${destination[0]},${destination[1]});
+        way["highway"="footway"](around:${maxDistance},${destination[0]},${destination[1]});
+        relation["highway"="footway"](around:${maxDistance},${destination[0]},${destination[1]});
         );
         out center;`
         return axios.get("https://lz4.overpass-api.de/api/interpreter", { params: { data: query } })
