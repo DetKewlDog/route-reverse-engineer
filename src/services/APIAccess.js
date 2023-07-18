@@ -16,7 +16,7 @@ class APIAccess {
         (
         node["addr:street"](around:${maxDistance},${destination[0]},${destination[1]});
         way["addr:street"](around:${maxDistance},${destination[0]},${destination[1]});
-        relation["addr:street"](around:${maxDistance},${destination[0]},${destination[1]});
+        rel["addr:street"](around:${maxDistance},${destination[0]},${destination[1]});
         );
         out center;`
         return axios.get("https://lz4.overpass-api.de/api/interpreter", { params: { data: query } })
