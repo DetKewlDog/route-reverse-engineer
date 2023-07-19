@@ -1,18 +1,16 @@
 import { Marker, Popup, Polyline } from 'react-leaflet';
 import { useState, useMemo, useRef } from 'react';
 import L from 'leaflet';
-import _markerIcon from '../images/marker-icon.png';
-import _markerIconDest from '../images/marker-icon-dest.png';
 
 const markerIcon = new L.Icon({
-    iconUrl: _markerIcon,
+    iconUrl: 'https://cdn.discordapp.com/attachments/801426473059614730/1131176177013366924/marker-icon.png',
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [0, -41],
 });
 
 const markerIconDest = new L.Icon({
-    iconUrl: _markerIconDest,
+    iconUrl: 'https://cdn.discordapp.com/attachments/801426473059614730/1131176188300242985/marker-icon-dest.png',
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [0, -41],
@@ -42,8 +40,8 @@ export default function MapMarker({ coords, route, distance, name, setCoords }) 
     return (
         <Marker draggable={setCoords !== undefined} position={coords} eventHandlers={eventHandlers} ref={markerRef} icon={icon}>
             <Popup>
-                {name !== undefined && name.split('|').map(x => (
-                    <footer><b>{x}</b></footer>
+                {name !== undefined && name.split('|').map((x, index) => (
+                    <footer key={index} footer><b>{x}</b></footer>
                 ))}
                 <a href={url} target="_blank">Google Maps link<br /></a>
                 {distance !== undefined && `Distance: ${distance}m`}
