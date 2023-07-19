@@ -196,7 +196,7 @@ img.leaflet-marker-shadow {
     display: none;
 }
 
-* :has(input[type=checkbox]:checked):has(label:last-of-type input[type=radio]:not(:checked)) .leaflet-tile {
+body:has(input[type=checkbox]:checked):has(label:last-of-type input[type=radio]:not(:checked)) .leaflet-tile {
     filter: var(--dark-tile-filter, none) !important;
 }
 
