@@ -52,18 +52,18 @@ function MapDisplay({ latitude, longitude, distance, isOnline, setCoords }) {
                 <LayersControl position="topright">
                     <MapLayer name="Default" checked
                         subdomains={['mt0', 'mt1', 'mt2', 'mt3']}
-                        url='http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}' />
+                        url='https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}' />
 
                     <MapLayer name="Leaflet"
                         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
 
                     <MapLayer name="Terrain"
                         subdomains={['mt0', 'mt1','mt2','mt3']}
-                        url='http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}' />
+                        url='https://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}' />
 
                     <MapLayer name="Satellite"
                         subdomains={['mt0', 'mt1','mt2','mt3']}
-                        url='http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}' />
+                        url='https://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}' />
 
                     <LayersControl.Overlay name='Dark Mode'>
                         <LayerGroup></LayerGroup>
