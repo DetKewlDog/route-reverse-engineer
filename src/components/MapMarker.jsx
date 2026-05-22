@@ -1,16 +1,18 @@
 import { Marker, Popup, Polyline } from 'react-leaflet';
 import { useState, useMemo, useRef } from 'react';
 import L from 'leaflet';
+import _markerIcon from '../images/marker-icon.png';
+import _markerIconDest from '../images/marker-icon-dest.png';
 
 const markerIcon = new L.Icon({
-    iconUrl: 'https://cdn.discordapp.com/attachments/801426473059614730/1131176177013366924/marker-icon.png',
+    iconUrl: _markerIcon,
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [0, -41],
 });
 
 const markerIconDest = new L.Icon({
-    iconUrl: 'https://cdn.discordapp.com/attachments/801426473059614730/1131176188300242985/marker-icon-dest.png',
+    iconUrl:  _markerIconDest,
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [0, -41],
