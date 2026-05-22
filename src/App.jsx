@@ -14,7 +14,7 @@ function App() {
 	const updateDistance = (dist) => localStorage.setItem('distance', dist) & setDistance(dist);
 
 	const start = () => {
-        const lat = document.querySelector('#inLat').value;
+		const lat = document.querySelector('#inLat').value;
 		if (lat === '') return;
 		const long = document.querySelector('#inLong').value;
 		if (long === '') return;
@@ -27,7 +27,7 @@ function App() {
 	}
 
 	const setCommunication = (state) => {
-        if (online !== state) setOnline(state);
+		if (online !== state) setOnline(state);
 	}
 
 	function setCoords(coords) {

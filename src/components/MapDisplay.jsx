@@ -27,11 +27,14 @@ function MapDisplay({ latitude, longitude, distance, isOnline, setCoords }) {
             const destinationStr = `${longitude},${latitude}`;
             var coords = [];
 
-            for await (const origin of positions) {
+            const chunkSize = 100;
+            for (let i = 0; i < positions.length; i += chunkSize) {
                 if (!isOnline) break;
-                const point = await APIAccess.validatePosition(coords, origin, destinationStr, distance);
-                if (point === undefined) continue;
-                setMarkers(prevMarkers => [...prevMarkers, point]);
+                const chunk = positions.slice(i, i + chunkSize);
+                const points = await Promise.all(chunk.map(origin =>
+                    APIAccess.validatePosition(coords, origin, destinationStr, distance)
+                ));
+                setMarkers(prevMarkers => [...prevMarkers, ...points.filter(Boolean)]);
             }
         }
         document.querySelectorAll('.output').forEach(x => x.addEventListener('wheel', preventScroll, { passive: false }));

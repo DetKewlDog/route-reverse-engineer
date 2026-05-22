@@ -22,12 +22,12 @@ class APIAccess {
         return axios.get("https://lz4.overpass-api.de/api/interpreter", { params: { data: query } })
             .then(result => result.data)
             .then(data => {
-                const positions = new Set(data.elements
+                const positions = Array.from(new Set(data.elements
                     .map(element => ({
                         lat: element?.center?.lat || element?.lat,
                         lon: element?.center?.lon || element?.lon,
                         name: APIAccess.getMarkerName(element)
-                    })));
+                    }))));
                 return positions;
             })
             .catch(error => console.error(error));

@@ -79,7 +79,7 @@ div:not(.output) > input {
     font-size: 16px;
     outline: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transition: box-shadow 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     margin-bottom: 15px;
 	text-indent: 10px;
     font-family: 'Consolas', monospace;
@@ -91,14 +91,12 @@ button:last-of-type { margin-inline-end: 0; }
 div:not(.output) > input:hover {
 	background-color: var(--hl1);
 	transform: translateY(-2px);
-	transition: transform 0.3s ease-in-out;
 }
 
 div:not(.output) > input:active,
 div:not(.output) > input:not(:hover) {
     background-color: var(--bg2);
 	transform: translateY(2px);
-	transition: transform 0.1s ease-in-out;
 }
 
 input:focus {
@@ -146,7 +144,7 @@ div:has(+input) > span::after {
 
 div:has(+input:hover) > span {
     opacity: 1;
-    transition: opacity 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 button {
@@ -160,21 +158,19 @@ button {
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     font-family: 'Consolas', monospace;
 }
 
 button:hover {
     background-color: var(--hl1);
 	transform: translateY(-2px);
-	transition: background-color 0.3s ease-in-out;
 }
 
 button:active,
 button:not(:hover) {
     background-color: var(--bg2);
 	transform: translateY(2px);
-    transition: background-color 0.1s ease-in-out;
 }
 
 button.on {
@@ -189,7 +185,6 @@ button:active.on,
 button:not(:hover).on {
     background-color: var(--green1);
 	transform: translateY(2px);
-	transition: transform 0.1s ease-in-out;
 }
 
 img.leaflet-marker-shadow {
